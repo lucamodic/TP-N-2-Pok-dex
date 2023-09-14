@@ -1,10 +1,10 @@
 <?php
-session_start();
+    session_start();
 
-if(!isset($_SESSION["usuario"]) ){
-    header("location:index.php");
-    exit();
-}
+    if(!isset($_SESSION["usuario"]) ){
+        header("location:index.php");
+        exit();
+    }
 
 ?>
 

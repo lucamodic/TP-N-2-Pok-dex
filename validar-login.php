@@ -2,9 +2,12 @@
 
     session_start();
 
+    $config = parse_ini_file('config.ini', true);
+
+
     $servername = 'localhost';
     $username = 'root';
-    $password = '';
+    $password = $config['clave'];
     $database = 'pokedex';
 
     // Create a new database connection
@@ -27,15 +30,20 @@
         header("location:index-admin.php");
         exit();
     } else {
-        $error = "error";
-        header("Location: index.php?error=" . $error . ".php");
+        header("Location: index.php");
         exit();
     }
 
 
-
     function validar($usuario, $clave, $resultado){
-        return validar_nombre($usuario, $resultado) && validar_clave($clave, $resultado);
+        user_vacio($usuario);
+        pass_vacia($clave);
+        if(user_vacio($usuario) && pass_vacia($clave)){
+            validar_nombre($usuario, $resultado);
+            validar_clave($clave, $resultado);
+            return validar_nombre($usuario, $resultado) && validar_clave($clave, $resultado);
+        }
+        return false;
     }
 
     function validar_nombre($usuario, $resultado){
@@ -44,6 +52,7 @@
                 return true;
             }
         }
+        setcookie("incorrecto", "incorrecto", time()+1600);
         return false;
     }
 
@@ -53,7 +62,42 @@
                 return true;
             }
         }
+        setcookie("incorrecto", "incorrecto", time()+1600);
+        if(isset($_COOKIE['user_vacio'])){
+            setcookie("user_vacio", "", time()-3600);
+        }
+        if(isset($_COOKIE['pass_vacia'])){
+            setcookie("pass_vacia", "", time()-3600);
+        }
         return false;
+    }
+
+    function pass_vacia($clave){
+        if($clave == ""){
+            setcookie("pass_vacia", "pass_vacia", time()+1600);
+            if(isset($_COOKIE['user_vacio'])){
+                setcookie("user_vacio", "", time()-3600);
+            }
+            if(isset($_COOKIE['incorrecto'])){
+                setcookie("incorrecto", "", time()-3600);
+            }
+            return false;
+        }
+        return true;
+    }
+
+    function user_vacio($usuario){
+        if($usuario == ""){
+            setcookie("user_vacio", "user_vacio", time()+1600);
+            if(isset($_COOKIE['pass_vacia'])){
+                setcookie("pass_vacia", "", time()-3600);
+            }
+            if(isset($_COOKIE['incorrecto'])){
+                setcookie("incorrecto", "", time()-3600);
+            }
+            return false;
+        }
+        return true;
     }
 
 

@@ -1,9 +1,29 @@
 <?php
     session_start();
+
     if(isset($_SESSION["usuario"]) ){
         header("location:index-admin.php");
         exit();
     }
+
+    function incorrecto(){
+        if(isset($_COOKIE['incorrecto'])){
+            echo "<h1>Usuario o contraseña incorrectos</h1>";
+        }
+    }
+
+    function contra_vacia(){
+        if(isset($_COOKIE['pass_vacia'])){
+            echo "pass";
+        }
+    }
+
+    function usuario_vacio(){
+        if(isset($_COOKIE['user_vacio'])){
+            echo "user";
+        }
+    }
+
 
 ?>
 
@@ -21,24 +41,12 @@
 
     <form action="validar-login.php" method="POST">
 
-        <input class="<?php
-        if(isset($_GET['error'])){
-            $error = $_GET['error'];
-            if(strlen($error)>1){
-                echo "error";
-            }
-        }
-        ?>" type="text" name="usuario" id="usuario">
-        <input class="<?php
-        if(isset($_GET['error'])){
-            $error = $_GET['error'];
-            if(strlen($error)>1){
-                echo "error";
-            }
-        }
-        ?>" type="password" name="clave" id="clave">
+        <input class="<?php usuario_vacio() ?> input-login" type="text" name="usuario" id="usuario">
+        <input class="<?php contra_vacia() ?> input-login" type="password" name="clave" id="clave">
         <input type="submit" value="enviar">
-
+        <?php
+            incorrecto();
+        ?>
     </form>
 
 </body>
