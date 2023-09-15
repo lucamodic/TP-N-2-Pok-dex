@@ -1,0 +1,16 @@
+.titulo{
+    margin: auto;
+    padding-left: 20rem;
+
+}
+.form{
+    padding-top: 1.5rem;
+    padding-right: 5rem;
+}
+.boton{
+    padding-bottom: 4px;
+    margin-bottom: 3px;
+}
+.fondo{
+    background-color: darkgray;
+}
