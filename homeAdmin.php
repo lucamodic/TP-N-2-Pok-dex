@@ -29,7 +29,12 @@
         </div>
     </form>
 </header>
-
+<?php
+$conexion = mysqli_connect("localhost", "root", "", "pokedex")
+or exit("No se pudo conectar a la base de datos");
+$sql = "SELECT * FROM pokemon";
+$resultado=$conexion->query($sql);
+?>
 <div class="container mt-3">
     <table class="table">
         <thead class="table-dark">
@@ -42,34 +47,23 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>A</td>
-            <td>Planta</td>
-            <td>1</td>
-            <td>Bulbasaur</td>
-            <td><button type="button" class="btn btn-primary">Modificacion</button>  <button type="button" class="btn btn-danger">Baja</button></td>
-        </tr>
-        <tr>
-            <td>B</td>
-            <td>Planta</td>
-            <td>2</td>
-            <td>Ivysaur</td>
-            <td><button type="button" class="btn btn-primary">Modificacion</button>  <button type="button" class="btn btn-danger">Baja</button></td>
-        </tr>
-        <tr>
-            <td>C</td>
-            <td>Planta, Veneno</td>
-            <td>3</td>
-            <td>Venusaur</td>
-            <td><button type="button" class="btn btn-primary">Modificacion</button>  <button type="button" class="btn btn-danger">Baja</button></td>
-        </tr>
-        <tr>
-            <td>D</td>
-            <td>Fuego</td>
-            <td>4</td>
-            <td>Charmander</td>
-            <td><button type="button" class="btn btn-primary">Modificacion</button>  <button type="button" class="btn btn-danger">Baja</button></td>
-        </tr>
+        <?php
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            echo "<tr>";
+            echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
+            echo "<td>{$fila['tipo']}</td>";
+            echo "<td>{$fila['num_id']}</td>";
+            echo "<td>{$fila['nombre']}</td>";
+            echo "<form action='editarAdmin.php' method='post' >";
+            echo "<input type='hidden' name='pokemon-id'>";
+            echo "<td><button type='submit' class='btn btn-primary' name='editar'>Editar</button>  
+            <button type='submit' class='btn btn-danger' name='baja'>Baja</button>
+            <button type='submit' class='btn btn-primary' name='alta'>Alta</button></td>";
+            echo "</form>";
+            echo "</tr>";
+        }
+        mysqli_close($conexion);
+        ?>
         </tbody>
     </table>
 

@@ -16,3 +16,5 @@ INSERT INTO `pokemon` (`id`, `num_id`, `imagen`, `nombre`, `tipo`, `descripcion`
 (2, 2, 'imagenes/ico_3ds_002', 'Ivysaur', 'planta', '...'),
 (3, 3, 'imagenes/ico_3ds_003', 'Venusaur', 'planta', '...'),
 (4, 4, 'imagenes/ico_3ds_004', 'Charmander', 'fuego', '...');
+
+INSERT INTO `usuario` (`usuario`, `clave`) VALUES ('a', 'a');
