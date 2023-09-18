@@ -1,3 +1,31 @@
+<?php
+session_start();
+
+if(isset($_SESSION["usuario"]) ){
+    header("location:homeAdmin.php");
+    exit();
+}
+
+function incorrecto(){
+    if(isset($_COOKIE['incorrecto'])){
+        echo "<h5>Usuario o contraseña incorrectos</h5>";
+    }
+}
+
+function contra_vacia(){
+    if(isset($_COOKIE['pass_vacia'])){
+        echo "pass";
+    }
+}
+
+function usuario_vacio(){
+    if(isset($_COOKIE['user_vacio'])){
+        echo "user";
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +41,15 @@
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
        <a href="home.php"><img width="210" src="/Pokedex/Images/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
-        <div class="form">
-            <input  type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <input  type="password" name="pass" id="pass" placeholder="Password">
-            <button type="button" class="btn btn-warning btn-sm boton">Login</button>
-        </div>
+        <form action="validar-login.php" method="POST" class="form">
+            <input class="<?php usuario_vacio() ?>" type="text" name="usuario" id="usuario" placeholder="Usuario">
+            <input class="<?php contra_vacia() ?>" type="password" name="clave" id="pass" placeholder="Password">
+            <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
+        </form>
     </div>
+    <?php
+    incorrecto();
+    ?>
     <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
             <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre,tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">

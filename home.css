@@ -14,3 +14,9 @@
 .fondo{
     background-color: darkgray;
 }
+
+.user, .pass {
+    border: 2px solid red !important;
+    border-radius:5px;
+}
+

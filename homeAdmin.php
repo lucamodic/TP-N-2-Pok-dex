@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION["usuario"]) ){
+        header("location:home.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +21,6 @@
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
         <a href="home.php"><img width="210" src="/Pokedex/Images/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
-        <div class="form">
-            <input  type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <input  type="password" name="pass" id="pass" placeholder="Password">
-            <button type="button" class="btn btn-warning btn-sm boton">Login</button>
-        </div>
     </div>
     <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">

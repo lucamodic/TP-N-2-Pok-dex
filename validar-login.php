@@ -27,10 +27,10 @@
 
     if (validar($usuario, $clave, $resultado)){
         $_SESSION["usuario"] = $usuario;
-        header("location:index-admin.php");
+        header("location:homeAdmin.php");
         exit();
     } else {
-        header("Location: index.php");
+        header("Location: home.php");
         exit();
     }
 
