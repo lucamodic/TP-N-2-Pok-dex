@@ -7,6 +7,10 @@ CREATE TABLE pokemon(
                         nombre VARCHAR(50),
                         tipo VARCHAR(50),
                         descripcion VARCHAR(50));
+CREATE TABLE usuario(
+    usuario VARCHAR(50) PRIMARY KEY NOT NULL UNIQUE,
+    clave VARCHAR(50) NOT NULL
+);
 INSERT INTO `pokemon` (`id`, `num_id`, `imagen`, `nombre`, `tipo`, `descripcion`) VALUES
 (1, 1, '../imagenes/ico_3ds_001', 'Bulbasaur', 'planta', '...'),
 (2, 2, '../imagenes/ico_3ds_002', 'Ivysaur', 'planta', '...'),
