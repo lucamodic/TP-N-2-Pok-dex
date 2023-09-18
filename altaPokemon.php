@@ -1,27 +1,10 @@
 <?php
+
 session_start();
 
-if(isset($_SESSION["usuario"]) ){
+if (isset($_SESSION["usuario"])) {
     header("location:homeAdmin.php");
     exit();
-}
-
-function incorrecto(){
-    if(isset($_COOKIE['incorrecto'])){
-        echo "<h5>Usuario o contraseña incorrectos</h5>";
-    }
-}
-
-function contra_vacia(){
-    if(isset($_COOKIE['pass_vacia'])){
-        echo "pass";
-    }
-}
-
-function usuario_vacio(){
-    if(isset($_COOKIE['user_vacio'])){
-        echo "user";
-    }
 }
 
 
@@ -42,13 +25,13 @@ function usuario_vacio(){
         <a href="home.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
         <form action="validar-login.php" method="POST" class="form">
-            <input class="<?php usuario_vacio() ?>" type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <input class="<?php contra_vacia() ?>" type="password" name="clave" id="pass" placeholder="Password">
+            <input type="text" name="usuario" id="usuario" placeholder="Usuario">
+            <input type="password" name="clave" id="pass" placeholder="Password">
             <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
         </form>
     </div>
     <?php
-    incorrecto();
+
     $conexion = mysqli_connect("localhost", "root", "", "pokedex");
     if (isset($_POST["pokemon-agregar"])) {
         $num_id = $_POST["num_id"];
