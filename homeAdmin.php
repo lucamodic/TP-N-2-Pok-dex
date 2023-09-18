@@ -51,7 +51,7 @@ $resultado=$conexion->query($sql);
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
-            echo "<td>{$fila['tipo']}</td>";
+            echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
             echo "<td>{$fila['num_id']}</td>";
             echo "<td>{$fila['nombre']}</td>";
             echo "<form action='editarAdmin.php' method='post' >";

@@ -2,10 +2,9 @@
 session_start();
 
 if(!isset($_SESSION["usuario"]) ){
-if (isset($_POST["pokemon-agregar"])) {
     header("location:homeAdmin.php");
     exit();
-}}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
