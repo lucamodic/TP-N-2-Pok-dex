@@ -39,7 +39,7 @@ function usuario_vacio(){
 <body class="fondo">
 <header class="">
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
-       <a href="home.php"><img width="210" src="/Pokedex/Images/pokemonLogo.png" alt=""></a>
+       <a href="home.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
         <form action="validar-login.php" method="POST" class="form">
             <input class="<?php usuario_vacio() ?>" type="text" name="usuario" id="usuario" placeholder="Usuario">
@@ -52,11 +52,16 @@ function usuario_vacio(){
     ?>
     <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
-            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre,tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <input type="submit" value="Quien es este pokemon?" class="input-group-text" id="basic-addon2">
+            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre, tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="submit" value="Quién es este pokemon?" class="input-group-text" id="basic-addon2">
         </div>
     </form>
 </header>
+<?php
+$conexion = mysqli_connect("localhost", "root", "", "pokedex")
+or exit("No se pudo conectar a la base de datos");
+$sql = "SELECT * FROM pokemon";
+$resultado=$conexion->query($sql);?>
 
 <div class="container mt-3">
     <table class="table">
@@ -69,30 +74,17 @@ function usuario_vacio(){
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>A</td>
-            <td>Planta</td>
-            <td>1</td>
-            <td>Bulbasaur</td>
-        </tr>
-        <tr>
-            <td>B</td>
-            <td>Planta</td>
-            <td>2</td>
-            <td>Ivysaur</td>
-        </tr>
-        <tr>
-            <td>C</td>
-            <td>Planta, Veneno</td>
-            <td>3</td>
-            <td>Venusaur</td>
-        </tr>
-        <tr>
-            <td>D</td>
-            <td>Fuego</td>
-            <td>4</td>
-            <td>Charmander</td>
-        </tr>
+        <?php
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            echo "<tr>";
+            echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
+            echo "<td>{$fila['tipo']}</td>";
+            echo "<td>{$fila['num_id']}</td>";
+            echo "<td>{$fila['nombre']}</td>";
+            echo "</tr>";
+        }
+        mysqli_close($conexion);
+        ?>
         </tbody>
     </table>
 
