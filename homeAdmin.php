@@ -2,8 +2,16 @@
     session_start();
 
     if(!isset($_SESSION["usuario"]) ){
-        header("location:home.php");
+        header("location:index.php");
         exit();
+    }
+
+    function logout(){
+        if (isset($_POST["Logout"])) {
+            unset($_SESSION["usuario"]);
+            header("location:index.php");
+            exit();
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -18,10 +26,17 @@
 </head>
 <body class="fondo">
 <header>
+
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
-        <a href="home.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
+        <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
+        <form action="<?php logout() ?>" method="POST" class="form">
+            <input class="btn btn-warning btn-sm boton" type="submit" name="Logout" value="Logout">
+        </form>
     </div>
+
+
+
     <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
             <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre,tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -67,6 +82,7 @@ $resultado=$conexion->query($sql);
         <button type='submit' class='btn btn-primary' name='alta'>Agregar Pokemon</button></td>
         </form>
     </table>
+    
 
 </div>
 

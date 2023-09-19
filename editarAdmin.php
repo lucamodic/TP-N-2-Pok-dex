@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if(isset($_SESSION["usuario"]) ){
-    header("location:homeAdmin.php");
+if(!isset($_SESSION["usuario"]) ){
+    header("location:index.php");
     exit();
 }
 ?>
@@ -19,7 +19,7 @@ if(isset($_SESSION["usuario"]) ){
 <body class="fondo">
 <header>
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
-        <a href="home.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
+        <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
     </div>
     <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">

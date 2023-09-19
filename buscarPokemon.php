@@ -24,7 +24,7 @@ or exit("No se pudo conectar a la base de datos");
 <body class="fondo">
 <header class="">
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
-        <a href="home.php"><img width="210" src="/Pokedex/Images/pokemonLogo.png" alt=""></a>
+        <a href="index.php"><img width="210" src="/Pokedex/Images/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
         <div class="form">
             <input  type="text" name="usuario" id="usuario" placeholder="Usuario">
