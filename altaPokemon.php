@@ -31,14 +31,23 @@ if (!isset($_SESSION["usuario"])) {
     $conexion = mysqli_connect("localhost", "root", "", "pokedex");
     if (isset($_POST["pokemon-agregar"])) {
         $num_id = $_POST["num_id"];
-        $imagen = $_POST["imagen"];
+        $imagen = $_FILES["imagen"]["name"];
+        $loc_temp=$_FILES["imagen"]["tmp_name"];
+        $imagen_ruta="imagenes/".$imagen;
+        move_uploaded_file($loc_temp, $imagen_ruta);
         $nombre = $_POST["nombre"];
         $tipo = $_POST["tipo"];
+        $tipo_ruta="imagenes/".$tipo.".png";
         $descripcion = $_POST["descripcion"];
+        if (empty($num_id)||empty($nombre)||empty($_FILES["imagen"]["name"])||empty($_POST["tipo"])||empty($_POST["descripcion"])){
+            echo "<h2>Deben ser ingresados todos los campos</h2>";
+        } elseif(!is_numeric($num_id)){
+            echo "<h2>El id debe ser numérico</h2>";
+        } else{
         $agregar="INSERT INTO pokemon (num_id, imagen, nombre, tipo, descripcion)
-        VALUES ('$num_id', '$imagen', '$nombre', '$tipo', '$descripcion')";
-    if ($conexion->query($agregar)) {echo "POKEMON AGREGADO";}
-    else {echo "PASÓ ALGO MALO:" . $conexion->error;}}
+        VALUES ('$num_id', '$imagen_ruta', '$nombre', '$tipo_ruta', '$descripcion')";
+    if ($conexion->query($agregar)) {header("Location: homeAdmin.php"); exit();}
+    else {echo "PASÓ ALGO MALO:" . $conexion->error;}}}
     ?>
 
 </body>

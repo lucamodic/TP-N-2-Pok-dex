@@ -28,3 +28,9 @@
 .a-nombre:hover {
     border-bottom:1px solid black;
 }
+#agregar{
+    float: right;
+}
+h2{
+    margin: 20px;
+}

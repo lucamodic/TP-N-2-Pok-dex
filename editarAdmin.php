@@ -54,16 +54,36 @@ $resultado=$conexion->query($sql);
                         <th>Numero</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>";
            echo "<tr>";
-           echo "<form action='altaPokemon.php' method='post' >";
+           echo "<form action='altaPokemon.php' method='post' enctype='multipart/form-data'>";
                echo "<input type='hidden' name='pokemon-agregar'>";
+               echo "<td><input type='file' name='imagen' placeholder='ingresar imagen'></td>";
+               echo " <td><select name='tipo'>
+                        <option value='acero'>Acero</option>
+                        <option value='agua'>Agua</option>
+                        <option value='bicho'>Bicho</option>
+                        <option value='dragon'>Dragón</option>
+                        <option value='electrico'>Eléctrico</option>
+                        <option value='fuego'>Fuego</option>
+                        <option value='fantasma'>Fantasma</option>
+                        <option value='hada'>Hada</option>
+                        <option value='hielo'>Hielo</option>
+                        <option value='lucha'>Lucha</option>
+                        <option value='normal'>Normal</option>
+                        <option value='planta'>Planta</option>
+                        <option value='psiquico'>Psíquico</option>
+                        <option value='roca'>Roca</option>
+                        <option value='siniestro'>Siniestro</option>
+                        <option value='tierra'>Tierra</option>
+                        <option value='veneno'>Veneno</option>
+                        <option value='volador'>Volador</option>
+                    </select></td>";
                echo "<td><input type='text' name='num_id' placeholder='ingresar id'></td>";
-               echo "<td><input type='text' name='imagen' placeholder='ingresar imagen'></td>";  //ESTO HAY QUE CAMBIARLO PARA ACEPTAR IMAGEN
                echo "<td><input type='text' name='nombre' placeholder='ingresar nombre'></td>";
-               echo "<td><input type='text' name='tipo' placeholder='tipo'></td>";
                echo "<td><input type='text' name='descripcion' placeholder='descripcion'></td>";
                echo "<td><button type='submit' class='btn btn-primary' name='alta'>Agregar</button></td>";
            echo "</form>";
