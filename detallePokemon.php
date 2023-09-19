@@ -1,9 +1,20 @@
 <?php
 
 $numero = $_GET['numero'];
-$database = new Database();
-$sql = "SELECT * FROM pokemon WHERE numero=$numero";
-$resultados = $database->query($sql);
+$config = parse_ini_file('config.ini', true);
+
+
+$servername = 'localhost';
+$username = 'root';
+$password = $config['clave'];
+$database = 'pokedex';
+
+// Create a new database connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+$sql = "SELECT * FROM pokemon WHERE id=$numero";
+
+$resultados = $conn->query($sql);
 
 ?>
 <!DOCTYPE html>

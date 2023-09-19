@@ -1,13 +1,9 @@
 <?php
-
 session_start();
-
 if (!isset($_SESSION["usuario"])) {
     header("location:index.php");
     exit();
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +26,8 @@ if (!isset($_SESSION["usuario"])) {
             <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
         </form>
     </div>
-    <?php
 
+    <?php
     $conexion = mysqli_connect("localhost", "root", "", "pokedex");
     if (isset($_POST["pokemon-agregar"])) {
         $num_id = $_POST["num_id"];
@@ -44,7 +40,6 @@ if (!isset($_SESSION["usuario"])) {
     if ($conexion->query($agregar)) {echo "POKEMON AGREGADO";}
     else {echo "PASÓ ALGO MALO:" . $conexion->error;}}
     ?>
-
 
 </body>
 </html>

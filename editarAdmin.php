@@ -59,13 +59,13 @@ $resultado=$conexion->query($sql);
                     <tbody>";
            echo "<tr>";
            echo "<form action='altaPokemon.php' method='post' >";
-           echo "<input type='hidden' name='pokemon-agregar'>";
-           echo "<td><input type='text' name='num_id' placeholder='ingresar id'></td>";
-           echo "<td><input type='text' name='imagen' placeholder='ingresar imagen'></td>";  //ESTO HAY QUE CAMBIARLO PARA ACEPTAR IMAGEN
-           echo "<td><input type='text' name='nombre' placeholder='ingresar nombre'></td>";
-           echo "<td><input type='text' name='tipo' placeholder='tipo'></td>";
-           echo "<td><input type='text' name='descripcion' placeholder='descripcion'></td>";
-           echo "<td><button type='submit' class='btn btn-primary' name='alta'>Agregar</button></td>";
+               echo "<input type='hidden' name='pokemon-agregar'>";
+               echo "<td><input type='text' name='num_id' placeholder='ingresar id'></td>";
+               echo "<td><input type='text' name='imagen' placeholder='ingresar imagen'></td>";  //ESTO HAY QUE CAMBIARLO PARA ACEPTAR IMAGEN
+               echo "<td><input type='text' name='nombre' placeholder='ingresar nombre'></td>";
+               echo "<td><input type='text' name='tipo' placeholder='tipo'></td>";
+               echo "<td><input type='text' name='descripcion' placeholder='descripcion'></td>";
+               echo "<td><button type='submit' class='btn btn-primary' name='alta'>Agregar</button></td>";
            echo "</form>";
            echo "</tr>";
         };
