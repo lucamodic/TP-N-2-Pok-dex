@@ -97,7 +97,8 @@ $resultado=$conexion->query($sql);
         } elseif (isset($_POST['baja'])) {
             $id = $_POST['pokemon-id'];
             $eliminado = "DELETE FROM pokemon WHERE num_id=$id";
-            if (mysqli_query($conexion, $eliminado)) {echo "<h2>POKEMON ELIMINADO</h2>";}
+            if (mysqli_query($conexion, $eliminado)) {echo "<h2>POKEMON ELIMINADO</h2>";
+               echo "<a href='index.php'> <button class='btn btn-primary' id='volver'>VOLVER </button></a>";}
         } elseif (isset($_POST['alta'])) {
            echo "<thead class='table-dark'>
                     <tr>
