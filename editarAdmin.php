@@ -21,6 +21,21 @@ if(!isset($_SESSION["usuario"]) ){
     <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
+       <?php
+        if(!isset($_SESSION["usuario"]) ) {
+            echo "<form action='validar-login.php' method='POST' class='form'>
+                <input class='<?php usuario_vacio() ?>' type='text' name='usuario' id='usuario' placeholder='Usuario'>
+                <input class='<?php contra_vacia() ?>' type='password' name='clave' id='pass' placeholder='Password'>
+                <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
+            </form>";
+        } else {
+            echo "
+                    <form action='<?php logout() ?>' method='POST' class='form'>
+                        <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
+                    </form>";
+        }
+
+        ?>
     </div>
     <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
