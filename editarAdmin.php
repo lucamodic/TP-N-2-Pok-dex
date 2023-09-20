@@ -32,16 +32,67 @@ if(!isset($_SESSION["usuario"]) ){
 <?php
 $conexion = mysqli_connect("localhost", "root", "", "pokedex")
 or exit("No se pudo conectar a la base de datos");
-$sql = "SELECT * FROM pokemon";
+$sql="SELECT * FROM pokemon";
 $resultado=$conexion->query($sql);
 ?>
 <div class="container mt-3">
     <table class="table">
 
         <?php
-        if (isset($_POST['editar'])) {
-            $id = $_POST['pokemon-id'];
-
+        if(isset($_POST['editar'])) {
+            $id=$_POST['pokemon-id'];
+            $select="SELECT * FROM pokemon WHERE num_id = $id";
+            $resultado=$conexion->query($select);
+            $fila=mysqli_fetch_assoc($resultado);
+            echo "<thead class='table-dark'>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Tipo</th>
+                        <th>Numero</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>";
+            echo "<tr>";
+            echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
+            echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
+            echo "<td>{$fila['num_id']}</td>";
+            echo "<td>{$fila['nombre']}</td>";
+            echo "<td>{$fila['descripcion']}</td><td></td></tr>";
+            echo "<tr>";
+            echo "<form action='editarPokemon.php' method='post' enctype='multipart/form-data'>";
+            echo "<input type='hidden' name='pokemon-editar'>";
+            echo "<input type='hidden' name='id' value='$id'>";
+            echo "<td><input type='file' name='imagen' placeholder='ingresar imagen'></td>";
+            echo " <td><select name='tipo'>
+                        <option value='acero'>Acero</option>
+                        <option value='agua'>Agua</option>
+                        <option value='bicho'>Bicho</option>
+                        <option value='dragon'>Dragón</option>
+                        <option value='electrico'>Eléctrico</option>
+                        <option value='fuego'>Fuego</option>
+                        <option value='fantasma'>Fantasma</option>
+                        <option value='hada'>Hada</option>
+                        <option value='hielo'>Hielo</option>
+                        <option value='lucha'>Lucha</option>
+                        <option value='normal'>Normal</option>
+                        <option value='planta'>Planta</option>
+                        <option value='psiquico'>Psíquico</option>
+                        <option value='roca'>Roca</option>
+                        <option value='siniestro'>Siniestro</option>
+                        <option value='tierra'>Tierra</option>
+                        <option value='veneno'>Veneno</option>
+                        <option value='volador'>Volador</option>
+                    </select></td>";
+            echo "<td><input type='text' name='num_id' placeholder='ingresar id'></td>";
+            echo "<td><input type='text' name='nombre' placeholder='ingresar nombre'></td>";
+            echo "<td><input type='text' name='descripcion' placeholder='descripcion'></td>";
+            echo "<td><button type='submit' class='btn btn-primary' name='alta'>Editar</button></td>";
+            echo "</form>";
+            echo "</tr>";
+        mysqli_close($conexion);
         } elseif (isset($_POST['baja'])) {
             $id = $_POST['pokemon-id'];
             $eliminado = "DELETE FROM pokemon WHERE num_id=$id";
@@ -88,8 +139,8 @@ $resultado=$conexion->query($sql);
                echo "<td><button type='submit' class='btn btn-primary' name='alta'>Agregar</button></td>";
            echo "</form>";
            echo "</tr>";
-        };
-        mysqli_close($conexion);
+
+        mysqli_close($conexion);}
         ?>
         </tbody>
     </table>
