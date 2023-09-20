@@ -67,6 +67,7 @@ $resultado=$conexion->query($sql);
             echo "<input type='hidden' name='id' value='$id'>";
             echo "<td><input type='file' name='imagen' placeholder='ingresar imagen'></td>";
             echo " <td><select name='tipo'>
+                        <option value=''>Seleccioná...</option>
                         <option value='acero'>Acero</option>
                         <option value='agua'>Agua</option>
                         <option value='bicho'>Bicho</option>

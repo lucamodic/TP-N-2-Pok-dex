@@ -41,25 +41,34 @@ if (!isset($_SESSION["usuario"])) {
         $tipo_ruta="imagenes/".$tipo.".png";
         $descripcion=$_POST["descripcion"];
         $resultados=array();
+        $ids="SELECT num_id FROM pokemon WHERE num_id='$num_id'";
+        $resultado_ids=$conexion->query($ids);
+        $editar = "";
+
         if(!empty($num_id)){
             if (!is_numeric($num_id)){
-                echo "<h2>El id debe ser numérico</h2>";
-            } else{
+                echo "<h2>El id debe ser numérico.</h2>";
+            } elseif (!$resultado_ids->num_rows==0) {
+            echo "<h2>El id ya existe.</h2>";
+             }else{
                 $editar="UPDATE pokemon SET num_id='$num_id' WHERE num_id=$id";
                 $resultados[]=$conexion->query($editar);
         }}if(!empty($imagen)){
-            $editar2="UPDATE pokemon SET imagen='$imagen_ruta' WHERE num_id=$id";
-            $resultados[]=$conexion->query($editar2);
+            $editar="UPDATE pokemon SET imagen='$imagen_ruta' WHERE num_id=$id";
+            $resultados[]=$conexion->query($editar);
         }if(!empty($nombre)) {
-            $editar3 = "UPDATE pokemon SET nombre='$nombre' WHERE num_id=$id";
-            $resultados[]=$conexion->query($editar3);
+            $editar = "UPDATE pokemon SET nombre='$nombre' WHERE num_id=$id";
+            $resultados[]=$conexion->query($editar);
         }if(!empty($tipo)){
-            $editar4 = "UPDATE pokemon SET tipo='$tipo_ruta' WHERE num_id=$id";
-            $resultados[]=$conexion->query($editar4);
+            $editar = "UPDATE pokemon SET tipo='$tipo_ruta' WHERE num_id=$id";
+            $resultados[]=$conexion->query($editar);
         }if(!empty($descripcion)){
             $editar5 = "UPDATE pokemon SET descripcion='$descripcion' WHERE num_id=$id";
             $resultados[]=$conexion->query($editar5);}
-        $fin=header("Location: homeAdmin.php"); exit();}
+        if (!empty($editar)) {
+            $fin=header("Location: homeAdmin.php"); exit();}else{
+            echo "<h2>Ningún campo fue editado.</h2>";
+        }}
     ?>
 
 </body>

@@ -39,7 +39,12 @@ if (!isset($_SESSION["usuario"])) {
         $tipo = $_POST["tipo"];
         $tipo_ruta="imagenes/".$tipo.".png";
         $descripcion = $_POST["descripcion"];
-        if (empty($num_id)||empty($nombre)||empty($_FILES["imagen"]["name"])||empty($_POST["tipo"])||empty($_POST["descripcion"])){
+        $ids="SELECT num_id FROM pokemon WHERE num_id='$num_id'";
+        $resultado_ids=$conexion->query($ids);
+
+        if (!$resultado_ids->num_rows==0) {
+            echo "<h2>El id ya existe</h2>";
+        } elseif (empty($num_id)||empty($nombre)||empty($_FILES["imagen"]["name"])||empty($_POST["tipo"])||empty($_POST["descripcion"])){
             echo "<h2>Deben ser ingresados todos los campos</h2>";
         } elseif(!is_numeric($num_id)){
             echo "<h2>El id debe ser numérico</h2>";
