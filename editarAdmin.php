@@ -24,7 +24,7 @@ if(!isset($_SESSION["usuario"]) ){
     </div>
     <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
-            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre,tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre, tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <input type="submit" value="Quién es este pokemon?" class="input-group-text" id="basic-addon2">
         </div>
     </form>

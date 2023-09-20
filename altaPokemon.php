@@ -54,6 +54,6 @@ if (!isset($_SESSION["usuario"])) {
     if ($conexion->query($agregar)) {header("Location: homeAdmin.php"); exit();}
     else {echo "PASÓ ALGO MALO:" . $conexion->error;}}}
     ?>
-
+    <a href="index.php"> <button class='btn btn-primary' id="volver">VOLVER </button></a>
 </body>
 </html>
