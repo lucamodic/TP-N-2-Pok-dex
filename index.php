@@ -74,6 +74,7 @@ $resultado=$conexion->query($sql);?>
             <th>Tipo</th>
             <th>Numero</th>
             <th>Nombre</th>
+            <th>Descripcion</th>
         </tr>
         </thead>
         <tbody>
@@ -81,9 +82,10 @@ $resultado=$conexion->query($sql);?>
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
-            echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
-            echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
-            echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
+            echo "<td class='td'><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
+            echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
+            echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
+            echo "<td class='td'>{$fila['descripcion']}</td>";
             echo "</tr>";
         }
         mysqli_close($conexion);

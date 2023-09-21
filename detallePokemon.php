@@ -70,7 +70,7 @@ $pokemon = mysqli_fetch_assoc($resultados);
             echo "
                     <article class='col-12 col-md-4 d-flex justify-content-center'>
                         <figure class='m-auto'>
-                            <img  width='320' height='240' src='{$pokemon['imagen']}' alt='Pokemon'>
+                            <img  width='300' height='220' src='{$pokemon['imagen']}' alt='Pokemon'>
                         </figure>
                     </article>
                     <article class='col-12 col-md-8'>

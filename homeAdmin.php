@@ -52,6 +52,7 @@ $sql = "SELECT * FROM pokemon";
 $resultado=$conexion->query($sql);
 ?>
 <div class="container mt-3">
+    <div class="table-container">
     <table class="table">
         <thead class="table-dark">
         <tr>
@@ -67,15 +68,15 @@ $resultado=$conexion->query($sql);
         <?php
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
-            echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
-            echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
-            echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
-            echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
-            echo "<td>{$fila['descripcion']}</td>";
+            echo "<td ><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
+            echo "<td class='td'><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
+            echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
+            echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
+            echo "<td class='td'>{$fila['descripcion']}</td>";
             echo "<form action='editarAdmin.php' method='post' >";
             echo "<input type='hidden' name='pokemon-id' value={$fila['num_id']}>";
-            echo "<td><button type='submit' class='btn btn-primary' name='editar'>Editar</button>  
-                <td><button type='submit' class='btn btn-danger' name='baja'>Baja</button></td>";
+            echo "<td class='td'><button type='submit' class='btn btn-primary' name='editar'>Editar</button>  
+                <td class='td'><button type='submit' class='btn btn-danger' name='baja'>Baja</button></td>";
             echo "</form>";
         }
         mysqli_close($conexion);
@@ -86,6 +87,7 @@ $resultado=$conexion->query($sql);
         <form action='editarAdmin.php' method='post' >
         <button type='submit' class='btn btn-primary' name='alta' id="agregar">Agregar Pokemon</button>
         </form>
+    </div>
 </div>
 
 </body>

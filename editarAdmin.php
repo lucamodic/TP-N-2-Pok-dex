@@ -47,6 +47,7 @@ $sql="SELECT * FROM pokemon";
 $resultado=$conexion->query($sql);
 ?>
 <div class="container mt-3">
+    <div class="table-container">
     <table class="table">
 
         <?php
@@ -68,10 +69,10 @@ $resultado=$conexion->query($sql);
                     <tbody>";
             echo "<tr>";
             echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
-            echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
-            echo "<td>{$fila['num_id']}</td>";
-            echo "<td>{$fila['nombre']}</td>";
-            echo "<td>{$fila['descripcion']}</td><td></td></tr>";
+            echo "<td class='td'><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
+            echo "<td class='td'>{$fila['num_id']}</td>";
+            echo "<td class='td'>{$fila['nombre']}</td>";
+            echo "<td class='td'>{$fila['descripcion']}</td><td></td></tr>";
             echo "<tr>";
             echo "<form action='editarPokemon.php' method='post' enctype='multipart/form-data'>";
             echo "<input type='hidden' name='pokemon-editar'>";
@@ -146,7 +147,7 @@ $resultado=$conexion->query($sql);
                         <option value='veneno'>Veneno</option>
                         <option value='volador'>Volador</option>
                     </select></td>";
-               echo "<td><input type='text' name='num_id' placeholder='ingresar id'></td>";
+               echo "<td ><input type='text' name='num_id' placeholder='ingresar id'></td>";
                echo "<td><input type='text' name='nombre' placeholder='ingresar nombre'></td>";
                echo "<td><input type='text' name='descripcion' placeholder='descripcion'></td>";
                echo "<td><button type='submit' class='btn btn-primary' name='alta'>Agregar</button></td>";
@@ -157,7 +158,7 @@ $resultado=$conexion->query($sql);
         ?>
         </tbody>
     </table>
-
+    </div>
 </div>
 
 </body>

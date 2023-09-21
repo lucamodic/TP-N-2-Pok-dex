@@ -79,7 +79,9 @@ h2{
     width:100vw;
     align-items:center;
 }
-
+.td{
+    vertical-align: middle;
+}
 @media only screen and (max-width: 800px ){
     .p-2{
         display:flex;
@@ -95,6 +97,10 @@ h2{
     .form-agregar {
         display:flex;
         flex-direction: column;
+    }
+    .table-container {
+        overflow-x: auto;
+        padding: 10px;
     }
 }
 
