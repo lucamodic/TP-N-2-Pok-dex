@@ -1,0 +1,100 @@
+.titulo, .titulo2{
+    margin: auto;
+}
+
+@media only screen and (min-width: 800px ){
+
+    .titulo2{
+        padding-right:10rem;
+    }
+
+    .titulo{
+        padding-left:13rem;
+    }
+
+    .header{
+        display: flex;
+    }
+
+    .form{
+        display: flex;
+    }
+
+    .input{
+        height: 30px;
+
+    }
+    .boton{
+        height: 30px;
+    }
+
+}
+
+.form{
+    padding-top: 1.5rem;
+
+}
+.boton{
+    padding-bottom: 4px;
+    margin-bottom: 3px;
+}
+.fondo{
+    background-color: darkgray;
+}
+
+.user, .pass {
+    border: 2px solid red !important;
+    border-radius:5px;
+}
+
+.a-nombre {
+    text-decoration:none;
+    color:black;
+}
+
+.a-nombre:hover {
+    border-bottom:1px solid black;
+    font-weight: bold;
+    font-size: larger;
+}
+#agregar{
+    float: right;
+}
+h2{
+    margin: 20px;
+}
+#volver{
+    margin: 10px;
+    color: white;
+}
+
+.tipo-pokemon-detalle {
+    margin-top:0.25rem;
+}
+
+.campos-ingresados {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width:100vw;
+    align-items:center;
+}
+
+@media only screen and (max-width: 800px ){
+    .p-2{
+        display:flex;
+        justify-content: center;
+        margin:auto;
+        align-items: center;
+    }
+
+    .tipo-pokemon-detalle {
+        margin-top:1.3rem;
+    }
+
+    .form-agregar {
+        display:flex;
+        flex-direction: column;
+    }
+}
+
