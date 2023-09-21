@@ -76,12 +76,14 @@ $resultado=$conexion->query($sql);
             echo "<input type='hidden' name='pokemon-id' value={$fila['num_id']}>";
             echo "<td><button type='submit' class='btn btn-primary' name='editar'>Editar</button>  
                 <td><button type='submit' class='btn btn-danger' name='baja'>Baja</button></td>";
+            echo "</form>";
         }
         mysqli_close($conexion);
         ?>
         </tr>
         </tbody>
     </table>
+        <form action='editarAdmin.php' method='post' >
         <button type='submit' class='btn btn-primary' name='alta' id="agregar">Agregar Pokemon</button>
         </form>
 </div>
