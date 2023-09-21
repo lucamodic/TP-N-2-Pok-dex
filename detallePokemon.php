@@ -29,12 +29,15 @@ $resultados = $conn->query($sql);
 </head>
 <body class="fondo">
 <header class="">
-    <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
+    <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
         <form action="validar-login.php" method="POST" class="form">
-            <input class="<?php usuario_vacio() ?>" type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <input class="<?php contra_vacia() ?>" type="password" name="clave" id="pass" placeholder="Password">
+            <input class="<?php usuario_vacio() ?> input" type="text" name="usuario" id="usuario" placeholder="Usuario">
+            <br>
+            <input class="<?php contra_vacia() ?> input" type="password" name="clave" id="pass" placeholder="Password">
+            <br>
+            <br>
             <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
         </form>
     </div>

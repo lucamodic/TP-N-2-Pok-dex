@@ -2,11 +2,6 @@
 
 session_start();
 
-if (isset($_SESSION["usuario"])) {
-    header("location:homeAdmin.php");
-    exit();
-}
-
 $conexion = mysqli_connect("localhost", "root", "", "pokedex")
 or exit("No se pudo conectar a la base de datos");
 
@@ -23,14 +18,31 @@ or exit("No se pudo conectar a la base de datos");
 </head>
 <body class="fondo">
 <header class="">
-    <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
-        <a href="index.php"><img width="210" src="/Pokedex/Images/pokemonLogo.png" alt=""></a>
+    <div class="container-fluid p-5 bg-dark text-white text-center header">
+        <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt="Pokedex"></a>
         <h1 class="titulo">Pokedex</h1>
-        <div class="form">
-            <input  type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <input  type="password" name="pass" id="pass" placeholder="Password">
-            <button type="button" class="btn btn-warning btn-sm boton">Login</button>
-        </div>
+
+
+        <?php
+            if(!isset($_SESSION["usuario"]) ) {
+                echo "<form action='validar-login.php' method='POST' class='form'>
+                <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
+                <br>
+                <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
+                <br>
+                <br>
+                <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
+            </form>";
+            } else {
+                    echo "
+                    <form action='<?php logout() ?>' method='POST' class='form'>
+                        <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
+                    </form>";
+                }
+
+        ?>
+
+
     </div>
     <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
@@ -54,7 +66,7 @@ if(empty($busqueda)){
     $resultado = $conexion->query($sql);
     if ($resultado->num_rows === 0) {
         echo "<div class='container mt-3'>";
-        echo "<h2>No se encontro Pokemon</h2>";
+        echo "<h2>No se encontró Pokemon</h2>";
         echo "</div>";
 
         $sqlTodo = "SELECT * FROM pokemon";

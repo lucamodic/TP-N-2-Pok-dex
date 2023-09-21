@@ -27,7 +27,7 @@
 <body class="fondo">
 <header>
 
-    <div class="container-fluid p-5 bg-dark text-white text-center d-flex">
+    <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
         <form action="<?php logout() ?>" method="POST" class="form">
@@ -36,13 +36,14 @@
     </div>
 
 
-
-    <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
+    <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
-            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre,tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre, tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <input type="submit" value="Quién es este pokemon?" class="input-group-text" id="basic-addon2">
         </div>
     </form>
+
+
 </header>
 <?php
 $conexion = mysqli_connect("localhost", "root", "", "pokedex")
@@ -59,6 +60,7 @@ $resultado=$conexion->query($sql);
             <th>Numero</th>
             <th>Nombre</th>
             <th>Descripcion</th>
+            <th></th> <th></th>
         </tr>
         </thead>
         <tbody>
@@ -69,21 +71,21 @@ $resultado=$conexion->query($sql);
             echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
             echo "<td>{$fila['num_id']}</td>";
             echo "<td>{$fila['nombre']}</td>";
+            echo "<td>{$fila['descripcion']}</td>";
             echo "<form action='editarAdmin.php' method='post' >";
             echo "<input type='hidden' name='pokemon-id' value={$fila['num_id']}>";
             echo "<td><button type='submit' class='btn btn-primary' name='editar'>Editar</button>  
-            <button type='submit' class='btn btn-danger' name='baja'>Baja</button>";
-            echo "";
+                <td><button type='submit' class='btn btn-danger' name='baja'>Baja</button></td>";
+            echo "</form>";
         }
         mysqli_close($conexion);
         ?>
         </tr>
         </tbody>
-        <button type='submit' class='btn btn-primary' name='alta'>Agregar Pokemon</button></td>
-        </form>
     </table>
-    
-
+        <form action='editarAdmin.php' method='post' >
+        <button type='submit' class='btn btn-primary' name='alta' id="agregar">Agregar Pokemon</button>
+        </form>
 </div>
 
 </body>

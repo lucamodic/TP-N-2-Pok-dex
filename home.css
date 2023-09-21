@@ -1,11 +1,31 @@
 .titulo{
     margin: auto;
-    padding-left: 20rem;
+
 
 }
+@media only screen and (min-width: 800px ){
+    .header{
+        display: flex;
+    }
+
+    .form{
+        display: flex;
+    }
+
+    .input{
+        height: 30px;
+
+    }
+    .boton{
+        height: 30px;
+    }
+
+
+}
+
 .form{
     padding-top: 1.5rem;
-    padding-right: 5rem;
+
 }
 .boton{
     padding-bottom: 4px;
@@ -27,4 +47,14 @@
 
 .a-nombre:hover {
     border-bottom:1px solid black;
+}
+#agregar{
+    float: right;
+}
+h2{
+    margin: 20px;
+}
+#volver{
+    margin: 10px;
+    color: white;
 }

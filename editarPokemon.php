@@ -32,31 +32,56 @@ if (!isset($_SESSION["usuario"])) {
 
     <?php
     $conexion = mysqli_connect("localhost", "root", "", "pokedex");
-    if (isset($_POST["pokemon-agregar"])) {
-        $num_id = $_POST["num_id"];
-        $imagen = $_FILES["imagen"]["name"];
+    if (isset($_POST["pokemon-editar"])) {
+        $id=$_POST["id"];
+        $num_id=$_POST["num_id"];
+        $imagen=$_FILES["imagen"]["name"];
         $loc_temp=$_FILES["imagen"]["tmp_name"];
         $imagen_ruta="imagenes/".$imagen;
         move_uploaded_file($loc_temp, $imagen_ruta);
-        $nombre = $_POST["nombre"];
-        $tipo = $_POST["tipo"];
+        $nombre=$_POST["nombre"];
+        $tipo=$_POST["tipo"];
         $tipo_ruta="imagenes/".$tipo.".png";
-        $descripcion = $_POST["descripcion"];
+        $descripcion=$_POST["descripcion"];
         $ids="SELECT num_id FROM pokemon WHERE num_id='$num_id'";
         $resultado_ids=$conexion->query($ids);
+        $editar="";
 
-        if (!$resultado_ids->num_rows==0) {
-            echo "<h2>El id ya existe</h2>";
-        } elseif (empty($num_id)||empty($nombre)||empty($_FILES["imagen"]["name"])||empty($_POST["tipo"])||empty($_POST["descripcion"])){
-            echo "<h2>Deben ser ingresados todos los campos</h2>";
-        } elseif(!is_numeric($num_id)){
-            echo "<h2>El id debe ser numérico</h2>";
-        } else{
-        $agregar="INSERT INTO pokemon (num_id, imagen, nombre, tipo, descripcion)
-        VALUES ('$num_id', '$imagen_ruta', '$nombre', '$tipo_ruta', '$descripcion')";
-    if ($conexion->query($agregar)) {header("Location: homeAdmin.php"); exit();}
-    else {echo "PASÓ ALGO MALO:" . $conexion->error;}}}
+        if(!empty($imagen)){
+            $editar="UPDATE pokemon SET imagen='$imagen_ruta' WHERE num_id=$id";
+            $resultado2=$conexion->query($editar);
+        }
+        if(!empty($nombre)) {
+            $editar = "UPDATE pokemon SET nombre='$nombre' WHERE num_id=$id";
+            $resultado3=$conexion->query($editar);
+        }
+        if(!empty($tipo)){
+            $editar = "UPDATE pokemon SET tipo='$tipo_ruta' WHERE num_id=$id";
+            $resultado4=$conexion->query($editar);
+        }
+        if(!empty($descripcion)){
+            $editar= "UPDATE pokemon SET descripcion='$descripcion' WHERE num_id=$id";
+            $resultado5=$conexion->query($editar);
+        }
+        if(!empty($num_id)){
+            if (!is_numeric($num_id)){
+
+                echo "<h2>El id debe ser numérico.</h2>";
+
+            } elseif (!$resultado_ids->num_rows == 0) {
+                echo "<h2>El id ya existe.</h2>";
+            }else{
+                $editar="UPDATE pokemon SET num_id='$num_id' WHERE num_id=$id";
+                $resultado1=$conexion->query($editar);
+            }
+        }
+        if (!empty($editar)) {
+            $fin=header("Location: homeAdmin.php"); exit();
+        }
+    }
     ?>
+
     <a href="index.php"> <button class='btn btn-primary' id="volver">VOLVER </button></a>
+
 </body>
 </html>
