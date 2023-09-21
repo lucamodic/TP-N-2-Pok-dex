@@ -12,9 +12,11 @@ $database = 'pokedex';
 // Create a new database connection
 $conn = new mysqli($servername, $username, $password, $database);
 
-$sql = "SELECT * FROM pokemon WHERE id=$numero";
+$sql = "SELECT * FROM pokemon WHERE num_id=$numero";
 
 $resultados = $conn->query($sql);
+
+$pokemon = mysqli_fetch_assoc($resultados);
 
 ?>
 <!DOCTYPE html>
@@ -32,46 +34,53 @@ $resultados = $conn->query($sql);
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo">Pokedex</h1>
-        <form action="validar-login.php" method="POST" class="form">
-            <input class="<?php usuario_vacio() ?> input" type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <br>
-            <input class="<?php contra_vacia() ?> input" type="password" name="clave" id="pass" placeholder="Password">
-            <br>
-            <br>
-            <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
-        </form>
-    </div>
-    <?php
-    incorrecto();
-    ?>
-    <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
-        <div class="input-group mb-3 p-2 container">
-            <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre, tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <input type="submit" value="Quién es este pokemon?" class="input-group-text" id="basic-addon2">
-        </div>
-    </form>
+        <?php
+        if(!isset($_SESSION["usuario"]) ) {
+            echo "<form action='validar-login.php' method='POST' class='form'>
+                <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
+                <br>
+                <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
+                <br>
+                <br>
+                <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
+            </form>";
+        } else {
+            echo "
+                    <form action='<?php logout() ?>' method='POST' class='form'>
+                        <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
+                    </form>";
+        }
+
+        ?>
+
 </header>
+<form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
+    <div class="input-group mb-3 p-2 container">
+        <input type="text" id ="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre, tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <input type="submit" value="Quién es este pokemon?" class="input-group-text" id="basic-addon2">
+    </div>
+</form>
 <main>
     <section class="container">
         <div class="row p-4 bg-light">
             <?php
-            echo '
-                    <article class="col-12 col-md-4 d-flex justify-content-center">
-                        <figure class="m-auto">
-                            <img  width="230" height="230" src="imagenes/' . $resultados[0]["imagen"] . '">
+            echo "
+                    <article class='col-12 col-md-4 d-flex justify-content-center'>
+                        <figure class='m-auto'>
+                            <img  width='330' height='230' src='{$pokemon['imagen']}' alt='Pokemon'>
                         </figure>
                     </article>
-                    <article class="col-12 col-md-8">
-                        <div class="p-2">
-                            <figure class="d-inline">
-                                <img width="50" height="50" src="imagenes/' . $resultados[0]["tipo"] . '">
+                    <article class='col-12 col-md-8'>
+                        <div class='p-2'>
+                            <figure class='d-inline'>
+                                <img width='110' height='23' src='{$pokemon['tipo']}'>
                             </figure>                            
-                            <h2 class="d-inline align-middle ms-3">'.$resultados[0]["nombre"].'</h2>
+                            <h2 class='d-inline align-middle ms-3'>{$pokemon['nombre']}</h2>
                         </div>
-                        <div class="p-2 py-3">
-                            <p>'.$resultados[0]["descripcion"].'</p>
+                        <div class='p-2 py-3'>
+                            <h4>{$pokemon['descripcion']}</h4>
                         </div>
-                    </article>'
+                    </article>"
             ?>
         </div>
 

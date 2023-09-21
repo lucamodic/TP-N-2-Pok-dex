@@ -70,7 +70,7 @@ $resultado=$conexion->query($sql);
             echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
             echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
             echo "<td>{$fila['num_id']}</td>";
-            echo "<td>{$fila['nombre']}</td>";
+            echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
             echo "<td>{$fila['descripcion']}</td>";
             echo "<form action='editarAdmin.php' method='post' >";
             echo "<input type='hidden' name='pokemon-id' value={$fila['num_id']}>";
