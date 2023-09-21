@@ -1,10 +1,18 @@
 <?php
-session_start();
+    session_start();
 
-if(!isset($_SESSION["usuario"]) ){
-    header("location:index.php");
-    exit();
-}
+    if(!isset($_SESSION["usuario"]) ){
+        header("location:index.php");
+        exit();
+    }
+
+    function logout(){
+        if (isset($_POST["Logout"])) {
+            unset($_SESSION["usuario"]);
+            header("location:index.php");
+            exit();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,25 +28,10 @@ if(!isset($_SESSION["usuario"]) ){
 <header>
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
-        <h1 class="titulo">Pokedex</h1>
-       <?php
-        if(!isset($_SESSION["usuario"]) ) {
-            echo "<form action='validar-login.php' method='POST' class='form'>
-                <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
-                <br>
-                <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
-                <br>
-                <br>
-                <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
-            </form>";
-        } else {
-            echo "
+        <h1 class="titulo2">Pokedex</h1>
                     <form action='<?php logout() ?>' method='POST' class='form'>
                         <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
-                    </form>";
-        }
-
-        ?>
+                    </form>
     </div>
     <form  action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">

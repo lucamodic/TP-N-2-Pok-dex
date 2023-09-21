@@ -1,9 +1,17 @@
 <?php
-session_start();
-if (!isset($_SESSION["usuario"])) {
-    header("location:index.php");
-    exit();
-}
+    session_start();
+    if (!isset($_SESSION["usuario"])) {
+        header("location:index.php");
+        exit();
+    }
+
+    function logout(){
+        if (isset($_POST["Logout"])) {
+            unset($_SESSION["usuario"]);
+            header("location:index.php");
+            exit();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,17 +27,13 @@ if (!isset($_SESSION["usuario"])) {
 <header class="">
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
-        <h1 class="titulo">Pokedex</h1>
-        <form action="validar-login.php" method="POST" class="form">
-            <input class="input" type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <br>
-            <input class="input" type="password" name="clave" id="pass" placeholder="Password">
-            <br>
-            <br>
-            <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
+        <h1 class="titulo2">Pokedex</h1>
+        <form action='<?php logout() ?>' method='POST' class='form'>
+            <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
         </form>
     </div>
 
+    <div class="campos-ingresados">
     <?php
     $conexion = mysqli_connect("localhost", "root", "", "pokedex");
     if (isset($_POST["pokemon-editar"])) {
@@ -82,6 +86,6 @@ if (!isset($_SESSION["usuario"])) {
     ?>
 
     <a href="index.php"> <button class='btn btn-primary' id="volver">VOLVER </button></a>
-
+    </div>
 </body>
 </html>

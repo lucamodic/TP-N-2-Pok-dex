@@ -1,9 +1,17 @@
-.titulo{
+.titulo, .titulo2{
     margin: auto;
-
-
 }
+
 @media only screen and (min-width: 800px ){
+
+    .titulo2{
+        padding-right:10rem;
+    }
+
+    .titulo{
+        padding-left:13rem;
+    }
+
     .header{
         display: flex;
     }
@@ -19,6 +27,7 @@
     .boton{
         height: 30px;
     }
+
 }
 
 .form{
@@ -61,6 +70,14 @@ h2{
     margin-top:0.25rem;
 }
 
+.campos-ingresados {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width:100vw;
+    align-items:center;
+}
+
 @media only screen and (max-width: 800px ){
     .p-2{
         display:flex;
@@ -72,4 +89,10 @@ h2{
     .tipo-pokemon-detalle {
         margin-top:1.3rem;
     }
+
+    .form-agregar {
+        display:flex;
+        flex-direction: column;
+    }
 }
+

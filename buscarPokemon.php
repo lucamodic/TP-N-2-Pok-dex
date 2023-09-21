@@ -4,7 +4,6 @@ session_start();
 
 $conexion = mysqli_connect("localhost", "root", "", "pokedex")
 or exit("No se pudo conectar a la base de datos");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,12 +19,11 @@ or exit("No se pudo conectar a la base de datos");
 <header class="">
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt="Pokedex"></a>
-        <h1 class="titulo">Pokedex</h1>
-
-
         <?php
-            if(!isset($_SESSION["usuario"]) ) {
-                echo "<form action='validar-login.php' method='POST' class='form'>
+        if(!isset($_SESSION["usuario"]) ) {
+            echo "
+                <h1 class='titulo'>Pokedex</h1>
+                <form action='validar-login.php' method='POST' class='form'>
                 <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
                 <br>
                 <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
@@ -33,15 +31,14 @@ or exit("No se pudo conectar a la base de datos");
                 <br>
                 <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
             </form>";
-            } else {
-                    echo "
+        } else {
+            echo "    <h1 class='titulo2'>Pokedex</h1>
                     <form action='<?php logout() ?>' method='POST' class='form'>
                         <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
                     </form>";
-                }
+        }
 
         ?>
-
 
     </div>
     <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
@@ -51,6 +48,8 @@ or exit("No se pudo conectar a la base de datos");
         </div>
     </form>
 </header>
+
+
 <?php
 $busqueda = strtolower($_GET['nombre']);
 if(empty($busqueda)){

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $numero = $_GET['numero'];
 $config = parse_ini_file('config.ini', true);
 
@@ -30,13 +32,14 @@ $pokemon = mysqli_fetch_assoc($resultados);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="fondo">
-<header class="">
+<header>
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
-        <h1 class="titulo">Pokedex</h1>
         <?php
         if(!isset($_SESSION["usuario"]) ) {
-            echo "<form action='validar-login.php' method='POST' class='form'>
+            echo "
+                <h1 class='titulo'>Pokedex</h1>
+                <form action='validar-login.php' method='POST' class='form'>
                 <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
                 <br>
                 <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
@@ -45,7 +48,7 @@ $pokemon = mysqli_fetch_assoc($resultados);
                 <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
             </form>";
         } else {
-            echo "
+            echo "    <h1 class='titulo2'>Pokedex</h1>
                     <form action='<?php logout() ?>' method='POST' class='form'>
                         <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
                     </form>";

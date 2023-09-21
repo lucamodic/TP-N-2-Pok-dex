@@ -4,6 +4,13 @@ if (!isset($_SESSION["usuario"])) {
     header("location:index.php");
     exit();
 }
+function logout(){
+    if (isset($_POST["Logout"])) {
+        unset($_SESSION["usuario"]);
+        header("location:index.php");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,44 +26,42 @@ if (!isset($_SESSION["usuario"])) {
 <header class="">
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
-        <h1 class="titulo">Pokedex</h1>
-        <form action="validar-login.php" method="POST" class="form">
-            <input class="input" type="text" name="usuario" id="usuario" placeholder="Usuario">
-            <br>
-            <input class="input" type="password" name="clave" id="pass" placeholder="Password">
-            <br>
-            <br>
-            <input type="submit" class="btn btn-warning btn-sm boton" value="Login">
+        <h1 class="titulo2">Pokedex</h1>
+        <form action="<?php logout() ?>" method="POST" class="form">
+            <input class="btn btn-warning btn-sm boton" type="submit" name="Logout" value="Logout">
         </form>
     </div>
+    <div class="campos-ingresados">
+        <?php
+        $conexion = mysqli_connect("localhost", "root", "", "pokedex");
+        if (isset($_POST["pokemon-agregar"])) {
+            $num_id = $_POST["num_id"];
+            $imagen = $_FILES["imagen"]["name"];
+            $loc_temp=$_FILES["imagen"]["tmp_name"];
+            $imagen_ruta="imagenes/".$imagen;
+            move_uploaded_file($loc_temp, $imagen_ruta);
+            $nombre = $_POST["nombre"];
+            $tipo = $_POST["tipo"];
+            $tipo_ruta="imagenes/".$tipo.".png";
+            $descripcion = $_POST["descripcion"];
+            $ids="SELECT num_id FROM pokemon WHERE num_id='$num_id'";
+            $resultado_ids=$conexion->query($ids);
 
-    <?php
-    $conexion = mysqli_connect("localhost", "root", "", "pokedex");
-    if (isset($_POST["pokemon-agregar"])) {
-        $num_id = $_POST["num_id"];
-        $imagen = $_FILES["imagen"]["name"];
-        $loc_temp=$_FILES["imagen"]["tmp_name"];
-        $imagen_ruta="imagenes/".$imagen;
-        move_uploaded_file($loc_temp, $imagen_ruta);
-        $nombre = $_POST["nombre"];
-        $tipo = $_POST["tipo"];
-        $tipo_ruta="imagenes/".$tipo.".png";
-        $descripcion = $_POST["descripcion"];
-        $ids="SELECT num_id FROM pokemon WHERE num_id='$num_id'";
-        $resultado_ids=$conexion->query($ids);
+            if (!$resultado_ids->num_rows==0) {
+                echo "<h2>El id ya existe</h2>";
+            } elseif (empty($num_id)||empty($nombre)||empty($_FILES["imagen"]["name"])||empty($_POST["tipo"])||empty($_POST["descripcion"])){
+                echo "<h2>Deben ser ingresados todos los campos</h2>";
+            } elseif(!is_numeric($num_id)){
+                echo "<h2>El id debe ser numérico</h2>";
+            } else{
+            $agregar="INSERT INTO pokemon (num_id, imagen, nombre, tipo, descripcion)
+            VALUES ('$num_id', '$imagen_ruta', '$nombre', '$tipo_ruta', '$descripcion')";
+        if ($conexion->query($agregar)) {header("Location: homeAdmin.php"); exit();}
+        else {echo "PASÓ ALGO MALO:" . $conexion->error;}}}
+        ?>
 
-        if (!$resultado_ids->num_rows==0) {
-            echo "<h2>El id ya existe</h2>";
-        } elseif (empty($num_id)||empty($nombre)||empty($_FILES["imagen"]["name"])||empty($_POST["tipo"])||empty($_POST["descripcion"])){
-            echo "<h2>Deben ser ingresados todos los campos</h2>";
-        } elseif(!is_numeric($num_id)){
-            echo "<h2>El id debe ser numérico</h2>";
-        } else{
-        $agregar="INSERT INTO pokemon (num_id, imagen, nombre, tipo, descripcion)
-        VALUES ('$num_id', '$imagen_ruta', '$nombre', '$tipo_ruta', '$descripcion')";
-    if ($conexion->query($agregar)) {header("Location: homeAdmin.php"); exit();}
-    else {echo "PASÓ ALGO MALO:" . $conexion->error;}}}
-    ?>
-    <a href="index.php"> <button class='btn btn-primary' id="volver">VOLVER </button></a>
+        <a href="index.php"> <button class='btn btn-primary' id="volver">VOLVER </button></a>
+    </div>
+
 </body>
 </html>
