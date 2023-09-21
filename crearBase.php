@@ -36,10 +36,10 @@ $sql = "CREATE TABLE IF NOT EXISTS pokemon (
 $conn->query($sql);
 
 $sql = "INSERT INTO pokemon (id, num_id, imagen, nombre, tipo, descripcion) VALUES
-    (1, 1, 'imagenes/ico_3ds_001.png', 'Bulbasaur', 'imagenes/planta.png', '...'),
-    (2, 2, 'imagenes/ico_3ds_002.png', 'Ivysaur', 'imagenes/planta.png', '...'),
-    (3, 3, 'imagenes/ico_3ds_003.png', 'Venusaur', 'imagenes/planta.png', '...'),
-    (4, 4, 'imagenes/ico_3ds_004.png', 'Charmander', 'imagenes/fuego.png', '...')";
+    (1, 1, 'imagenes/bulbasaur.gif', 'Bulbasaur', 'imagenes/planta.png', '...'),
+    (2, 2, 'imagenes/ivysaur.gif', 'Ivysaur', 'imagenes/planta.png', '...'),
+    (3, 3, 'imagenes/venusaur.gif', 'Venusaur', 'imagenes/planta.png', '...'),
+    (4, 4, 'imagenes/charmander.gif', 'Charmander', 'imagenes/fuego.png', '...')";
 $conn->query($sql);
 
 $sql = "INSERT INTO usuario (usuario, clave) VALUES ('admin', 'admin')";

@@ -82,6 +82,10 @@ h2{
 .td{
     vertical-align: middle;
 }
+#pass{
+    margin-left: 10px;
+    margin-right: 10px;
+}
 @media only screen and (max-width: 800px ){
     .p-2{
         display:flex;
