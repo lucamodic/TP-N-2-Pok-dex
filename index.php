@@ -82,7 +82,7 @@ $resultado=$conexion->query($sql);?>
             echo "<tr>";
             echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
             echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
-            echo "<td>{$fila['num_id']}</td>";
+            echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
             echo '<td><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
             echo "</tr>";
         }
