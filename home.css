@@ -19,8 +19,6 @@
     .boton{
         height: 30px;
     }
-
-
 }
 
 .form{
@@ -57,4 +55,21 @@ h2{
 #volver{
     margin: 10px;
     color: white;
+}
+
+.tipo-pokemon-detalle {
+    margin-top:0.25rem;
+}
+
+@media only screen and (max-width: 800px ){
+    .p-2{
+        display:flex;
+        justify-content: center;
+        margin:auto;
+        align-items: center;
+    }
+
+    .tipo-pokemon-detalle {
+        margin-top:1.3rem;
+    }
 }
