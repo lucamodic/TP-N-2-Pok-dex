@@ -44,7 +44,8 @@
 }
 
 .a-nombre:hover {
-    border-bottom:1px solid black;
+    font-weight: bold;
+    font-size: larger;
 }
 #agregar{
     float: right;
