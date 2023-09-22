@@ -5,14 +5,6 @@
         header("location:index.php");
         exit();
     }
-
-    function logout(){
-        if (isset($_POST["Logout"])) {
-            unset($_SESSION["usuario"]);
-            header("location:index.php");
-            exit();
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +22,7 @@
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <h1 class="titulo2">Pokedex</h1>
-        <form action="<?php logout() ?>" method="POST" class="form">
+        <form action="logout.php" method="POST" class="form">
             <input class="btn btn-warning btn-sm boton" type="submit" name="Logout" value="Logout">
         </form>
     </div>

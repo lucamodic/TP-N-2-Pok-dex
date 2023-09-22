@@ -1,9 +1,12 @@
+body {
+    overflow-x:hidden;
+}
+
 .titulo, .titulo2{
     margin: auto;
 }
 
-@media only screen and (min-width: 800px ){
-
+@media only screen and (min-width: 1080px ){
     .titulo2{
         padding-right:10rem;
     }
@@ -27,8 +30,35 @@
     .boton{
         height: 30px;
     }
-
 }
+
+@media only screen and (min-width: 1050px ){
+    .titulo2{
+        padding-right:10rem;
+    }
+
+    .titulo{
+        padding-left:13rem;
+    }
+
+    .header{
+        display: flex;
+    }
+
+    .form{
+        display: flex;
+    }
+
+    .input{
+        height: 30px;
+
+    }
+    .boton{
+        height: 30px;
+    }
+}
+
+
 
 .form{
     padding-top: 1.5rem;
@@ -86,7 +116,9 @@ h2{
     margin-left: 10px;
     margin-right: 10px;
 }
-@media only screen and (max-width: 800px ){
+
+
+@media only screen and (max-width: 500px ){
     .p-2{
         display:flex;
         justify-content: center;

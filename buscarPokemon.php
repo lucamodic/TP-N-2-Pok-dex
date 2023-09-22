@@ -4,6 +4,14 @@ session_start();
 
 $conexion = mysqli_connect("localhost", "root", "", "pokedex")
 or exit("No se pudo conectar a la base de datos");
+
+function logout(){
+    if (isset($_POST["Logout"])) {
+        unset($_SESSION["usuario"]);
+        header("location:index.php");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,16 +32,16 @@ or exit("No se pudo conectar a la base de datos");
             echo "
                 <h1 class='titulo'>Pokedex</h1>
                 <form action='validar-login.php' method='POST' class='form'>
-                <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
-                <br>
-                <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
-                <br>
-                <br>
-                <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
-            </form>";
+                    <input class='<?php usuario_vacio() ?> input' type='text' name='usuario' id='usuario' placeholder='Usuario'>
+                    <br>
+                    <input class='<?php contra_vacia() ?> input' type='password' name='clave' id='pass' placeholder='Password'>
+                    <br>
+                    <br>
+                    <input type='submit' class='btn btn-warning btn-sm boton' value='Login'>
+                </form>";
         } else {
             echo "    <h1 class='titulo2'>Pokedex</h1>
-                    <form action='<?php logout() ?>' method='POST' class='form'>
+                    <form action='logout.php' method='POST' class='form'>
                         <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
                     </form>";
         }

@@ -66,7 +66,7 @@ or exit("No se pudo conectar a la base de datos");
 $sql = "SELECT * FROM pokemon";
 $resultado=$conexion->query($sql);?>
 
-<div class="container mt-3">
+<div class="container mt-3 table-container">
     <table class="table">
         <thead class="table-dark">
         <tr>

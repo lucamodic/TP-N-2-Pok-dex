@@ -1,11 +1,8 @@
 <?php
 
 session_start();
-
 $numero = $_GET['numero'];
 $config = parse_ini_file('config.ini', true);
-
-
 $servername = 'localhost';
 $username = 'root';
 $password = $config['clave'];
@@ -36,6 +33,7 @@ $pokemon = mysqli_fetch_assoc($resultados);
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt=""></a>
         <?php
+        include_once ('logout.php');
         if(!isset($_SESSION["usuario"]) ) {
             echo "
                 <h1 class='titulo'>Pokedex</h1>
@@ -49,7 +47,7 @@ $pokemon = mysqli_fetch_assoc($resultados);
             </form>";
         } else {
             echo "    <h1 class='titulo2'>Pokedex</h1>
-                    <form action='<?php logout() ?>' method='POST' class='form'>
+                    <form action='logout.php' method='POST' class='form'>
                         <input class='btn btn-warning btn-sm boton' type='submit' name='Logout' value='Logout'>
                     </form>";
         }
