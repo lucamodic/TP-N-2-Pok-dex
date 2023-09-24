@@ -8,13 +8,9 @@ $username = 'root';
 $password = $config['clave'];
 $database = 'pokedex';
 
-// Create a new database connection
 $conn = new mysqli($servername, $username, $password, $database);
-
 $sql = "SELECT * FROM pokemon WHERE num_id=$numero";
-
 $resultados = $conn->query($sql);
-
 $pokemon = mysqli_fetch_assoc($resultados);
 
 ?>
