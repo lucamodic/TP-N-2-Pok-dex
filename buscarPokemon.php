@@ -52,7 +52,7 @@ function logout(){
     <form action="buscarPokemon.php" method="GET" enctype="application/x-www-form-urlencoded">
         <div class="input-group mb-3 p-2 container">
             <input type="text" id ="nombre" name="nombre" class="form-control"  placeholder="Ingrese el nombre,tipo o número de pokémon" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <input type="submit" value="Quien es este pokemon?" name="enviar" class="input-group-text" id="basic-addon2">
+            <input type="submit" value="Quién es este pokemon?" name="enviar" class="input-group-text" id="basic-addon2">
         </div>
     </form>
 </header>
@@ -84,33 +84,66 @@ if(empty($busqueda)){
 }
 ?>
 
-<div class="container mt-3">
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th>Imagen</th>
-            <th>Tipo</th>
-            <th>Numero</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-        </tr>
-        </thead>
-        <tbody>
+
         <?php
+        if(isset($_SESSION["usuario"]) ){
+            echo "<div class='container mt-3'>
+        <table class='table'>
+            <thead class='table-dark'>
+            <tr>
+                <th>Imagen</th>
+                <th>Tipo</th>
+                <th>Numero</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th></th> <th></th>
+            </tr>
+            </thead>
+            <tbody>";
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                echo "<tr>";
+                echo "<td ><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
+                echo "<td class='td'><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
+                echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
+                echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
+                echo "<td class='td'>{$fila['descripcion']}</td>";
+                echo "<form action='editarAdmin.php' method='post' >";
+                echo "<input type='hidden' name='pokemon-id' value={$fila['num_id']}>";
+                echo "<td class='td'><button type='submit' class='btn btn-primary' name='editar'>Editar</button>  
+                <td class='td'><button type='submit' class='btn btn-danger' name='baja'>Baja</button></td>";
+                echo "</form>";
+            }
+        }else{
+             echo "<div class='container mt-3'>
+        <table class='table'>
+            <thead class='table-dark'>
+            <tr>
+                <th>Imagen</th>
+                <th>Tipo</th>
+                <th>Numero</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+            </tr>
+            </thead>
+            <tbody>";
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             echo "<td><img src='{$fila['imagen']}' alt='{$fila['nombre']}'></td>";
-            echo "<td><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
+            echo "<td class='td'><img src='{$fila['tipo']}' alt='{$fila['tipo']}'></td>";
             echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['num_id'] . '</a></td>';
             echo '<td class="td"><a class="a-nombre" href="detallePokemon.php?numero=' . $fila['num_id'] . '">' . $fila['nombre'] . '</a></td>';
             echo "<td class='td'>{$fila['descripcion']}</td>";
             echo "</tr>";
-        }
+        }}
         mysqli_close($conexion);
         ?>
         </tbody>
     </table>
-
+    <?php
+    if(isset($_SESSION["usuario"]) ){
+           echo" <form action='editarAdmin.php' method='post' >
+                <button type='submit' class='btn btn-primary' name='alta' id='agregar'>Agregar Pokemon</button>
+            </form>";}?>
 </div>
 
 </body>

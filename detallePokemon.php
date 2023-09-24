@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 $numero = $_GET['numero'];
 $config = parse_ini_file('config.ini', true);
 $servername = 'localhost';
