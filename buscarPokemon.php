@@ -23,7 +23,7 @@ function logout(){
     <link rel="stylesheet" type="text/css" href="home.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="fondo">
+<div class="fondo">
 <header class="">
     <div class="container-fluid p-5 bg-dark text-white text-center header">
         <a href="index.php"><img width="210" src="imagenes/pokemonLogo.png" alt="Pokedex"></a>
@@ -88,6 +88,7 @@ if(empty($busqueda)){
         <?php
         if(isset($_SESSION["usuario"]) ){
             echo "<div class='container mt-3'>
+<div class='table-container'>
         <table class='table'>
             <thead class='table-dark'>
             <tr>
@@ -145,7 +146,7 @@ if(empty($busqueda)){
                 <button type='submit' class='btn btn-primary' name='alta' id='agregar'>Agregar Pokemon</button>
             </form>";}?>
 </div>
-
+</div>
 </body>
 </html>
 
