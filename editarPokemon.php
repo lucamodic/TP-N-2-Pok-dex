@@ -35,7 +35,10 @@
 
     <div class="campos-ingresados">
     <?php
-    $conexion = mysqli_connect("localhost", "root", "", "pokedex");
+    $config = parse_ini_file('config.ini', true);
+    $password = $config['clave'];
+
+    $conexion = mysqli_connect("localhost", "root", $password, "pokedex");
     if (isset($_POST["pokemon-editar"])) {
         $id=$_POST["id"];
         $num_id=$_POST["num_id"];

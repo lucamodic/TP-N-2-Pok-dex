@@ -2,6 +2,10 @@ body {
     overflow-x:hidden;
 }
 
+html {
+    background-color: darkgray;
+}
+
 .titulo, .titulo2{
     margin: auto;
 }

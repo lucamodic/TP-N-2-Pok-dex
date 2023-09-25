@@ -2,7 +2,10 @@
 
 session_start();
 
-$conexion = mysqli_connect("localhost", "root", "", "pokedex")
+$config = parse_ini_file('config.ini', true);
+$password = $config['clave'];
+
+$conexion = mysqli_connect("localhost", "root", $password, "pokedex")
 or exit("No se pudo conectar a la base de datos");
 
 function logout(){
@@ -70,6 +73,7 @@ if(empty($busqueda)){
                                         num_id LIKE '%$busqueda%')";
 
 
+
     $resultado = $conexion->query($sql);
     if ($resultado->num_rows === 0) {
         echo "<div class='container mt-3'>";
@@ -80,6 +84,7 @@ if(empty($busqueda)){
         $resultado = $conexion->query($sqlTodo);
     }
 
+    
 
 }
 ?>
@@ -88,7 +93,7 @@ if(empty($busqueda)){
         <?php
         if(isset($_SESSION["usuario"]) ){
             echo "<div class='container mt-3'>
-<div class='table-container'>
+        <div class='table-container'>
         <table class='table'>
             <thead class='table-dark'>
             <tr>
@@ -116,6 +121,7 @@ if(empty($busqueda)){
             }
         }else{
              echo "<div class='container mt-3'>
+        <div class='table-container'>
         <table class='table'>
             <thead class='table-dark'>
             <tr>
@@ -138,15 +144,14 @@ if(empty($busqueda)){
         }}
         mysqli_close($conexion);
         ?>
-        </tbody>
-    </table>
-    <?php
-    if(isset($_SESSION["usuario"]) ){
-           echo" <form action='editarAdmin.php' method='post' >
-                <button type='submit' class='btn btn-primary' name='alta' id='agregar'>Agregar Pokemon</button>
-            </form>";}?>
-</div>
-</div>
+            </tbody>
+        </table>
+        <?php
+        if(isset($_SESSION["usuario"]) ){
+               echo" <form action='editarAdmin.php' method='post' >
+                    <button type='submit' class='btn btn-primary' name='alta' id='agregar'>Agregar Pokemon</button>
+                </form>";}?>
+        </div>
 </body>
 </html>
 

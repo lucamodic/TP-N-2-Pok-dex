@@ -33,7 +33,10 @@ function logout(){
     </div>
     <div class="campos-ingresados">
         <?php
-        $conexion = mysqli_connect("localhost", "root", "", "pokedex");
+        $config = parse_ini_file('config.ini', true);
+        $password = $config['clave'];
+
+        $conexion = mysqli_connect("localhost", "root", $password, "pokedex");
         if (isset($_POST["pokemon-agregar"])) {
             $num_id = $_POST["num_id"];
             $imagen = $_FILES["imagen"]["name"];
